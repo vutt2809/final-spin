@@ -1,43 +1,31 @@
-import React, { Component } from "react";
-import {
-  Button,
-  Header,
-  Segment,
-  TransitionablePortal
-} from "semantic-ui-react";
-import "semantic-ui-css/semantic.min.css";
-export default class TrPortal extends Component {
-  state = { open: false };
+import React, { useState } from 'react';
+import { Button, Header, Segment, TransitionablePortal } from 'semantic-ui-react';
+import 'semantic-ui-css/semantic.min.css';
 
-  handleOpen = () => this.setState({ open: true });
+export const TrPortal = () => {
+    const [open, setOpen] = useState(false);
 
-  handleClose = () => this.setState({ open: false });
+    const handleOpen = () => {
+        setOpen(true);
+    };
 
-  render() {
-    const { open } = this.state;
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
-      <TransitionablePortal
-        closeOnTriggerClick
-        onOpen={this.handleOpen}
-        onClose={this.handleClose}
-        openOnTriggerClick
-        trigger={
-          <Button
-            content={open ? "Close Portal" : "Open Portal"}
-            negative={open}
-            positive={!open}
-          />
-        }
-      >
-        <Segment
-          style={{ left: "40%", position: "fixed", top: "50%", zIndex: 1000 }}
+        <TransitionablePortal
+            closeOnTriggerClick
+            onOpen={handleOpen}
+            onClose={handleClose}
+            openOnTriggerClick
+            trigger={<Button content={open ? 'Close Portal' : 'Open Portal'} negative={open} positive={!open} />}
         >
-          <Header>This is an example portal</Header>
-          <p>Portals have tons of great callback functions to hook into.</p>
-          <p>To close, simply click the close button or click away</p>
-        </Segment>
-      </TransitionablePortal>
+            <Segment style={{ left: '40%', position: 'fixed', top: '50%', zIndex: 1000 }}>
+                <Header>This is an example portal</Header>
+                <p>Portals have tons of great callback functions to hook into.</p>
+                <p>To close, simply click the close button or click away</p>
+            </Segment>
+        </TransitionablePortal>
     );
-  }
-}
+};
